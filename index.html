@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Justified Spending</title>
+    <link rel="icon" href="assets/tony.png">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="body">
+    <div>
+        <img src="assets/nhs.png" width="25%">
+    </div>
+    <div class="container" style="font-family: regular">
+        <h2 style="font-family: regular">How much is X amount in NHS Spending?</h2>
+        <p>Enter an amount in Pound Sterling to see how long the NHS would take to spend it:</p>
+
+        <input type="number" id="amount" placeholder="Enter amount in £">
+        <button onclick="calculateTime()">Calculate</button>
+
+        <h3>Time Equivalent:</h3>
+        <p id="result"></p>
+    </div>
+
+    <details class="details" style="font-family:regular">
+        <summary>More info</summary>
+        <div>
+            <p>The NHS spends per:</p>
+            <p>Year = £179,500,000,000 (Billion)</p>
+            <p>Month = £14,960,000,000 (Billion)</p>
+            <p>Week = £3,450,000,000 (Billion)</p>
+            <p>Day = £492,000,000 (Million)</p>
+            <p>Hour = £20,500,000 (Million)</p>
+            <p>Minute = £341,667</p>
+            <p>Second = £5,694</p>
+        </div>
+    </details>
+    <footer class="footerText" style="font-family: regular;">
+        <p> *All spending figures are calculated using official NHS data collected from 2023-24</p>
+    </footer>
+
+    <script>
+        function calculateTime() {
+            let amount = parseFloat(document.getElementById("amount").value);
+
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById("result").innerText = "Please enter a valid amount.";
+                return;
+            }
+
+            // NHS spending rates
+            const perSecond = 5694;
+            const perMinute = 341667;
+            const perHour = 20500000;
+            const perDay = 492000000;
+
+           
+            let days = Math.floor(amount / perDay);
+            amount %= perDay;
+
+            let hours = Math.floor(amount / perHour);
+            amount %= perHour;
+
+            let minutes = Math.floor(amount / perMinute);
+            amount %= perMinute;
+
+            let seconds = Math.floor(amount / perSecond);
+
+
+            document.getElementById("result").innerText = 
+                `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds.`;
+        }
+    </script>
+</body>
+</html>
